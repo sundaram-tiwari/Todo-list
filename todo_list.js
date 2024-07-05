@@ -1,14 +1,12 @@
 let input_task = document.getElementById("task_input");
 let buttons = document.querySelectorAll("button")
-// localStorage.clear()
 let i = 0
-
 const getTasksFromLocalStorage = () => {
     let tasks = [];
     for (let j = 0; j < localStorage.length; j++) {
         const key = localStorage.key(j);
         if (key.startsWith('task_')) {
-            tasks.push(localStorage.getItem(key));
+            tasks.push({ key: key, text: localStorage.getItem(key) });
         }
     }
     return tasks;
@@ -17,8 +15,10 @@ const getTasksFromLocalStorage = () => {
 const renderTask = () => {
 
     getTasksFromLocalStorage().forEach(task => {
-        showTask(task);
+        showTask(task.text, task.key);
     });
+
+    i = localStorage.length; 
 
     let buttonsArray = Array.from(buttons)
     buttonsArray.forEach(btn => {
@@ -26,20 +26,26 @@ const renderTask = () => {
             const task_test = input_task.value.trim();
             if (e.target.innerHTML == 'Submit') {
                 if (task_test != "") {
-                    showTask(task_test)
+                    showTask(task_test, `task_${i}`)
+                    i++;
                 }
+            }
+            else if (e.target.innerHTML == 'Delete All'){
+                let deleteAllMsg = document.querySelector(".task-container")
+                deleteAllMsg.innerHTML = "";
+                localStorage.clear()
+                i = 0;
             }
         })
     })
 }
 
-const showTask = (task_text) => {
+const showTask = (task_text, key) => {
     const task_list = document.createElement("div")
     const task_msg = document.createElement("p")
     const task_btn = document.createElement("div")
 
     localStorage.setItem(`task_${i}`, task_text);
-    i++;
 
     task_msg.textContent = 'New Task : ' + task_text;
 
@@ -47,8 +53,7 @@ const showTask = (task_text) => {
     cross_btn.innerHTML = '<i class="fa-solid fa-circle-xmark cross-btn task-btn"></i>'
     cross_btn.addEventListener('click', () => {
         task_list.remove()
-        removeFromLocalStorage(i-1)
-        i--;
+        removeFromLocalStorage(key)
     })
 
     const check_btn = document.createElement("i")
@@ -69,8 +74,7 @@ const showTask = (task_text) => {
     input_task.value = "";
 }
 
-const removeFromLocalStorage = (index) => {
-    localStorage.removeItem(`task_${index}`);
+const removeFromLocalStorage = (key) => {
+    localStorage.removeItem(key);
 }
-
 renderTask()
