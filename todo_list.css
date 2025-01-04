@@ -20,6 +20,8 @@ body{
     position: fixed;
     border-radius: 16px;
     background: transparent;
+    width: 80%;
+    max-width: 700px;
     box-shadow: 0px 4px 15px rgba(113, 115, 119, 0.5);
 }
 
@@ -28,7 +30,7 @@ body{
 }
 
 input{
-    width: 320px;
+    width: 100%;
     border: solid white 0.5px;
     padding: 12px;
     margin: 12px 12px 12px 0px;
@@ -42,18 +44,17 @@ input{
 
 .todo-sort{
     display: flex;
-    justify-content: space-between;
-    /* margin-left: 10px;
-    margin-right: 10px; */
 }
 
 .options{
-    width: 100px;
+    width: 40%;
+    max-width: 100px;
     height: 50px;
     align-self: center;
     border-radius: 16px;
     background: transparent;
     color: #E2DFD0;
+    margin-right: 30px;
     font-size: 20px;
 }
 
@@ -62,11 +63,12 @@ input{
 }
 
 .task-list{
-    width: 420px;
+    width: 100%;
     border: 1.5px solid white;
     border-radius: 8px;
-    margin: 10px;
+    margin: 10px 10px 10px 0px;
     display: flex;
+    padding: 10px 0px 10px 10px;
     justify-content: space-between;
     font-size: 20px;
 }
@@ -75,10 +77,10 @@ input{
     display: flex;
 }
 .task-btn{
-    margin: 6px;
+    margin: 5px;
     padding: 2px;
     color: white;
-    font-size: 30px;
+    font-size: 31px;
     border-radius: 50%;
 }
 

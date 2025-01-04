@@ -18,7 +18,7 @@ const renderTask = () => {
         showTask(task.text, task.key);
     });
 
-    i = localStorage.length; 
+    i = localStorage.length;
 
     let buttonsArray = Array.from(buttons)
     buttonsArray.forEach(btn => {
@@ -30,7 +30,7 @@ const renderTask = () => {
                     i++;
                 }
             }
-            else if (e.target.innerHTML == 'Delete All'){
+            else if (e.target.innerHTML == 'Delete All') {
                 let deleteAllMsg = document.querySelector(".task-container")
                 deleteAllMsg.innerHTML = "";
                 localStorage.clear()
@@ -62,7 +62,6 @@ const showTask = (task_text, key) => {
         task_msg.style.textDecoration = 'line-through'
     })
 
-    // task_btn.classList.add("task-btns")
     task_btn.appendChild(check_btn)
     task_btn.appendChild(cross_btn)
 
@@ -70,11 +69,13 @@ const showTask = (task_text, key) => {
     task_list.appendChild(task_btn)
     task_list.classList.add("task-list");
 
-    document.body.firstElementChild.lastElementChild.appendChild(task_list)
+    const taskContainer = document.getElementById('taskContainer');
+    taskContainer.appendChild(task_list);
     input_task.value = "";
 }
 
 const removeFromLocalStorage = (key) => {
     localStorage.removeItem(key);
 }
-renderTask()
+
+renderTask();
